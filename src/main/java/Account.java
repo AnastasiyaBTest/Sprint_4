@@ -9,13 +9,20 @@ public class Account {
     public boolean checkNameToEmboss() {
 
        boolean isNameValid;
+
+        try {
+            if(name == null)
+                name.replaceAll("[^ ]", "").length();
+
+        } catch (NullPointerException exception) {
+            isNameValid = false;
+            return isNameValid;
+        }
+
        int countSpaces = name.replaceAll("[^ ]", "").length();
        String nameWithoutSpaces = name.trim();
-
-        if(name.length() >= 3 && name.length() <= 19 &&
-                countSpaces == 1 && name.equals(nameWithoutSpaces))
-            isNameValid = true;
-        else isNameValid = false;
+        isNameValid = name.length() >= 3 && name.length() <= 19 &&
+                countSpaces == 1 && name.equals(nameWithoutSpaces);
 
         return isNameValid;
     }
